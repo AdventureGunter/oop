@@ -1,6 +1,3 @@
-/**
- * Created by User on 26.05.2017.
- */
 function AsyncArrayES5(arr) {
     if (Array.isArray(arr)){
         this.promise =  new Promise(function (resolve, reject) {
@@ -33,6 +30,7 @@ AsyncArrayES5.prototype.mapAsync = function(fn) {
         throw new TypeError(fn + ' is not a function');
     }
     return this.then(function(data) {
+        //console.log(data);
         if (data === void 0 || data === null) {
             throw new TypeError(data + 'is undefined or null');
         }
@@ -86,7 +84,7 @@ AsyncArrayES5.prototype.filterAsync = function(fn) {
                     }
                 })
             }
-        , Promise.resolve())
+            , Promise.resolve())
             .then(function () {return res});
     });
 };

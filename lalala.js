@@ -1,7 +1,23 @@
 /**
  * Created by User on 26.05.2017.
  */
-class AsyncArray extends Promise{
+/**
+ * Created by User on 26.05.2017.
+ */
+class AsyncArray {
+    constructor(someObj) {
+        this.promise = new Promise(someObj);
+        this.resolve = Promise.prototype
+    }
+
+    then(resolve, reject) {
+        return Promise.then.call(this, resolve, reject);
+    }
+
+    catch(reject) {
+        return super.catch(reject);
+    }
+
     mapAsync(fn) {
         if (this === void 0 || this === null) {
             throw new TypeError();
@@ -10,7 +26,6 @@ class AsyncArray extends Promise{
             throw new TypeError(fn + ' is not a function');
         }
         return this.then(data => {
-            console.log(this);
             let res = [];
             if (data === void 0 || data === null) {
                 throw new TypeError(data + 'is undefined or null');
